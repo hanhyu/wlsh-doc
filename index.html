@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>wlsh</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <link rel="icon" href="_media/favicon.ico">
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="/_media/gitalk.css">
+  <link rel="stylesheet" href="/_media/vue.css">
+  <script src="//unpkg.com/docsify-edit-on-github@1.0.1/index.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'wlsh',
+      repo: 'hanhyu/wlsh-framework',
+      loadNavbar: true,
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      noEmoji: true,
+      search: {
+        noData: {
+          '/': '没有找到相关文档!'
+        },
+        paths: 'auto',
+        placeholder: {
+          '/': '请输出搜索关键词'
+        }
+      },
+      plugins: [
+        EditOnGithubPlugin.create('https://github.com/hanhyu/wlsh-doc/blob/master/', null, '编辑/Edit'),
+        // power by
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/QingWei-Li/docsify/blob/master/docs/' + vm.route.file
+            // var editHtml = '[:memo: Edit Document](' + url + ')\n'
+            var editHtml = '\n'
+            return editHtml
+                    + html
+                    + '\n\n----\n\n'
+                    + '<a href="https://docsify.js.org" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">Powered by docsify</a>'
+          })
+        }
+      ]
+    }
+  </script>
+  <script src="/_media/docsify.min.js"></script>
+  <script src="/_media/search.min.js"></script>
+  <script src="/_media/prism-bash.min.js"></script>
+  <script src="/_media/prism-json.min.js"></script>
+  <script src="/_media/prism-php.min.js"></script>
+  <script src="/_media/prism-php-extras.min.js"></script>
+  <script src="/_media/gitalk.plugin.min.js"></script>
+  <script src="/_media/gitalk.min.js"></script>
+
+  <script>
+    const gitalk = new Gitalk({
+      clientID: '1044ecbe0d9da9ac3377',
+      clientSecret: 'd14ebedb602e77f66fa43c607221747bb935a354',
+      repo: 'wlsh-framework',
+      owner: 'hanhyu',
+      id: 'window.location.pathname',
+      admin: ['hanhyu'],
+      distractionFreeMode: false
+    });
+  </script>
+</body>
+</html>
