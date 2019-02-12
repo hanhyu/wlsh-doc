@@ -1,13 +1,17 @@
-## 组件容器启动说明
+#### 组件容器
 
-* 1、启动docker start base_frame
+## 启动说明
 
-* 2、启动docker start base_mysql_8.0
+1. 启动框架：docker start base_frame
 
-* 3、启动docker start base_redis_5.0
+2. 启动缓存：docker start base_redis_5.0
 
-* 4、宿主机的mysql的3307映射base_mysql_8.0中的3306
+3. 启动数据库：docker start base_mysql_8.0
 
-* 5、宿主机的redis的6380映射base_redis_5.0中的6379
+## 默认设置
 
-> 后面会放出组件扩展的整套docker服务运行环境
+1. 宿主机redis的6380映射base_redis_5.0中的6379
+
+2. 宿主机mysql的3307映射base_mysql_8.0中的3306
+
+> 稍后会放出组件扩展的整套docker服务运行环境
