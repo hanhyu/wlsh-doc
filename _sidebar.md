@@ -7,7 +7,7 @@
   * [框架启动](/quickstart.md)
   * [变更日志](/changelog.md)
   
-* 核心功能  
+* 核心功能
   * [一个入口](/open.md)
   * [两个核心](/core.md)
 
@@ -19,7 +19,6 @@
   * [模型](/model.md)
   * [请求](/request.md)
   * [响应](/response.md)
-  * [Cookie](/cookie.md)
   * [Session](/session.md)
   * [接口文档](/apidoc.md)
   * [协程](/coroutine.md)
@@ -41,7 +40,7 @@
   * [注意事项](/notice.md)
   * [常见问题](/qa.md)
   * [扩展阅读](/more.md)
-  
+
 * TODO
   * [分布式容器](/distributed-docker.md)
   * [分布式数据库](/distributed-data.md)
