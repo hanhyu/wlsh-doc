@@ -1,4 +1,4 @@
-## 扩展
+#### 扩展
 
 baseFrame项目中初始状态只加入了一个基本PHP数据库框架（medoo）与日志库（monolog）两个扩展; 其他扩展可根据自己
 使用的场景不同用composer require 安装自己想用的扩展。
