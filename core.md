@@ -4,7 +4,7 @@
 
 > 目录application/library/Server.php 该类是项目的核心所在，基于swoole的服务器，可同时处理websocket、http、tcp、udp等协议
 
-* 默认开启websocket与http两种协议
+* 默认开启websocket与http(含https、http2.0)两种协议
 
 * 默认隔离两种协议的请求接口通信互不干扰
 
