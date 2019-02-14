@@ -15,7 +15,8 @@
 ## 停止服务
 > php swoole.php stop
 
-## 重启服务
+## 重载工作进程
 > php swoole.php reload
 
-?> 注意：所有命令都是在根目录下执行
+
+?> 注意：所有命令都是在根目录下执行;不支持restart命令，重启服务请先用stop命令停止服务、再用start系列命令开启服务。
