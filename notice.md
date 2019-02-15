@@ -24,6 +24,8 @@ select:表名是base_config,后端接口在model层把查询的字段做一一�
 
 7、按照约定：变量、公共函数、接口暴露的uri、接口数据字段名等都使用下划线，类中方法使用小写驼峰，类名使用大写驼峰。
 
+8、如果不熟悉swoole的运行机制，请不要开启OPcache、Apc等php代码缓存功能，由于swoole本身就是常驻内存的，所以无须开启代码缓存功能。
+
 **更多文档内容等抽空一一说明**
 
 > workerProcess与taskProcess可以理解为ADM模式的A与D层的关系，同时也有点像传统的controllers与services层的关系,但又有本质的区别：
