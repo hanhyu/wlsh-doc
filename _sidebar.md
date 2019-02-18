@@ -22,15 +22,14 @@
   * [Session](/session.md)
   * [接口文档](/apidoc.md)
   * [协程](/coroutine.md)
-  * [异常处理](/error.md)
   * [任务](/task.md)
   * [日志](/log.md)
   * [扩展](/composer.md)
 
 * [供参考]协程连接池
   * [Redis](/redis.md)
-  * [Mysql](/mysql.md)
-  * [Mongodb](/mongodb.md)
+  * [pdo](/pdo.md)
+  * [协程mysql](/mysql.md)
 
 * [供参考]怎样使用
   * [默认示例](/system.md)
