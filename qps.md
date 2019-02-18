@@ -7,5 +7,6 @@
 | golang的gf框架 | 约6.2万 | [压测图](https://github.com/hanhyu/wlsh-doc/blob/master/gf.png) | c10k  | https://goframe.org |
 | c++的mongols网络库 | 约10万 | [压测图](https://github.com/hanhyu/wlsh-doc/blob/master/mongols.png) | c10k | https://mongols.hi-nginx.com |
 | wlsh框架 | 约5.8万 | [压测图](https://github.com/hanhyu/wlsh-doc/blob/master/wlsh.png) | c10k | https://wlsh.site |
+| wlsh框架 | 约10万 | [压测图](https://github.com/hanhyu/wlsh-doc/blob/master/wlsh-http2.png) | http2.0 | https://wlsh.site |
 
 > 结论：使用wlsh即方便又在性能上不掉队。
