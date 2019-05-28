@@ -1,6 +1,6 @@
-#### 服务
+#### 服务领域
 
-application/services中目录结构与modules模块目录结构保持一致性
+application/domain中目录结构与modules模块目录结构保持一致性
 
  * 每个php文件需要开启严格模式：declare(strict_types=1);
  
@@ -11,18 +11,18 @@ application/services中目录结构与modules模块目录结构保持一致性
 <?php
 declare(strict_types=1);
 
-namespace App\Services\System;
+namespace App\Domain\System;
 
 use App\Models\Mysql\{
-    SystemUser as User,
+    SystemUser,
     SystemUserLog as UserLog,
     UserLogView as UserV,
 };
 
-class UserServices
+class User
 {
     /**
-     * @var User
+     * @var SystemUser
      */
     private $user;
     /**
@@ -36,7 +36,7 @@ class UserServices
 
     public function __construct()
     {
-        $this->user     = new User();
+        $this->user     = new SystemUser();
         $this->user_log = new UserLog();
         $this->user_v   = new UserV();
     }

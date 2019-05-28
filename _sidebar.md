@@ -15,7 +15,7 @@
   * [配置](/config.md)
   * [路由](/route.md)
   * [控制器](/controller.md)
-  * [服务](/service.md)
+  * [服务领域](/domain.md)
   * [模型](/model.md)
   * [请求](/request.md)
   * [响应](/response.md)
