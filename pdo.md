@@ -5,3 +5,5 @@
 * 默认配置加载mysql与pgsql扩展做为连接对象，支持mysql、mssql、oracle、sqlite、pgsql等pdo扩展。
 
 * mysql扩展依赖wait_timeout与interactive_timeout两个参数值，用来释放连接池中长时间一直没使用过的连接对象。
+
+* 该连接池是被动地增加池子对象：初始启动时连接池对象为0,运行中根据客户端并发的情况自动增加池子对象，来保证最大限度地处理连接。
