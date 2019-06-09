@@ -24,6 +24,7 @@
   * [协程](/coroutine.md)
   * [任务](/task.md)
   * [日志](/log.md)
+  * [国际化](/lang.md)
   * [扩展](/composer.md)
 
 * [供参考]协程连接池
