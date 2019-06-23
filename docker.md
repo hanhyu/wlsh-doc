@@ -14,4 +14,4 @@
 
 2. 宿主机mysql的3307映射base_mysql_8.0中的3306
 
-> 稍后会放出组件扩展的整套docker服务运行环境
+> docker-composer 稍后会放出组件扩展的整套docker服务运行环境

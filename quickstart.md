@@ -1,5 +1,9 @@
 #### 框架启动
 
+wlsh启动所需的php扩展版本最低要求：
+
+> 必须已安装php 7.3、swoole 4.3.3、redis-5.0、mysql-8.0、inotify、yaf 13.1.1(支持命名空间的yaf版本，链接：https://github.com/gaohuia/yaf)
+
 ## 启动预检
 > php swoole.php start         每次启动服务前使用该命令做预检
 

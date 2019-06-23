@@ -8,24 +8,28 @@
 > 2. medoo扩展是基于pdo开发的，且测试性能基本与原生pdo性能一致。
 > 3. 使用medoo容易做协程连接池扩展，可最大化减少连接池相关问题。
  
+ ## mysql模型
+ 
 ```
 <?php
 declare(strict_types=1);
 
 namespace App\Models\Mysql;
 
+use Exception;
+
 class SystemUser extends AbstractMysql
 {
-    private $table = 'frame_system_user';
+    prodected $table = 'frame_system_user';
 
     /**
      * @param array $data
      *
      * @return array
+     * @throws Exception
      */
-    protected function getUserList(array $data): array
+    public function getUserList(array $data): array
     {
-        $datas = [];
         if (!empty($data['where'])) {
             $wheres = [
                 'AND'   => $data['where'],
@@ -38,30 +42,130 @@ class SystemUser extends AbstractMysql
                 'LIMIT' => [$data['curr_data'], $data['page_size']],
             ];
         }
-
-        try {
-            $datas = $this->db->select($this->table, '*', $wheres);
-        } catch (\Exception $e) {
-            co_log($this->db->last(), "信息出错：{$e->getMessage()},,出错的sql：");
-        } finally {
-            if ($datas === false) {
-                co_log($this->db->last(), '查询信息失败的sql：');
-                $datas = [];
-            }
-        }
+        
+        $datas = $this->db->select($this->table, '*', $wheres);
+        
+        if ($datas == false) throw new Exception($this->db->last());
+        
         return $datas;
     }
 
-    protected function getListCount(): int
+    /**
+     * @return int
+     * @throws Exception
+     */
+    public function getListCount(): int
     {
-        $datas = 1;
-        try {
-            $datas = $this->db->count($this->table);
-        } catch (\Exception $e) {
-            co_log($this->db->last(), "信息出错：{$e->getMessage()},,出错的sql：");
-        }
+        $datas = $this->db->count($this->table);
+        if ($datas == false) throw new Exception($this->db->last());
         return $datas;
     }
     
 }
+```
+
+> 在domain服务中直接使用，如：
+```
+$list = MysqlFactory::systemUser()->getUserList($data);
+```
+
+## redis模型
+
+```
+<?php
+declare(strict_types=1);
+
+namespace App\Models\Redis;
+
+class Login extends AbstractRedis
+{
+    /**
+     * 此处使用静态延迟绑定，实现选择不同的数据库,如不设置默认为0
+     * @var int
+     */
+    protected static $dbindex = 1;
+
+    /**
+     *
+     * @param string $key
+     *
+     * @return string|null
+     */
+    public function getValue(string $key): ?string
+    {
+        $datas = $this->db->get($key);
+        if ($datas == false) $datas = null;
+        return $datas;
+    }
+
+}
+```
+
+> 在domain服务中直接使用，如：
+```
+$value = RedisFactory::login()->getValue($key);
+```
+
+## mongo模型
+
+```
+<?php
+declare(strict_types=1);
+
+namespace App\Models\Mongo;
+
+class Monolog extends AbstractMongo
+{
+    /**
+     * @param array $data
+     *
+     * @return array
+     * @throws \MongoDB\Driver\Exception\Exception
+     */
+    public function getMongoList(array $data): array
+    {
+        /*$filter = [
+              //'level'=> 200,
+          ];*/
+        $options = [
+            'sort'  => ['datetime' => -1],
+            'skip'  => $data['curr_data'],
+            'limit' => (int)$data['page_size'],
+            //'projection' => ['_id'=>0],
+        ];
+        $res     = $this->col->find($data['where'], $options);
+        return $res->toArray();
+    }
+
+    /**
+     *
+     * @param array $where
+     *
+     * @return int
+     * @throws \MongoDB\Driver\Exception\Exception
+     */
+    public function getMongoCount(array $where): int
+    {
+        return $this->col->countDocuments($where);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return array
+     * @throws \MongoDB\Driver\Exception\Exception
+     */
+    public function getMongoInfo(string $id): array
+    {
+        $id = new \MongoDB\BSON\ObjectId($id);
+        return $this->col->findOne(['_id' => $id])->toArray();
+    }
+
+}
+```
+
+> 使用时需指定数据库与实例，如：
+```
+$monolog = MongoFactory::monolog('baseFrame', 'monolog');
+$list = $monolog->getMongoList($data);
 ```
