@@ -11,43 +11,69 @@ ControllersTrait中是设置全局服务对象、设置全局请求对象、设�
  * http_response方法是对返回的数据格式进行封装
  
  * 支持手动抛出异常并返回接口数据，但必须指定异常状态码;否则将视为系统异常，只做日志记录，不会把异常内容返回接口。
- 示例：throw new \Exception('参数错误', 400);
+ 示例：throw new \ProgramException('参数错误', 400);
  
  * 其他流程操作与语法都需按照php及yaf和swoole提供的原生语法操作
  
- > 请勿使用静态类与静态方法，也不要过度封装与过度使用继承。
+示例：
 
 ```
 <?php
 declare(strict_types=1);
 
-use \App\Services\System\UserServices;
+namespace App\Modules\System\controllers;
 
-class UserController extends Yaf\Controller_Abstract
+use App\Domain\System\User as UserDomain;
+use App\Models\Forms\SystemUserForms;
+use Yaf\Controller_Abstract;
+use Exception;
+
+class UserController extends Controller_Abstract
 {
-    use \App\Library\ControllersTrait;
+    use \ControllersTrait;
 
     /**
-     * @var UserServices
+     * @var UserDomain
      */
-    private $user;
+    protected $user;
 
     public function init()
     {
         $this->beforeInit();
-        $this->user = new UserServices();
+        $this->user = new UserDomain();
     }
     
+    /**
+     * 创建用户
+     * @throws Exception
+     */
+    public function setUserAction(): void
+    {
+        $data = $this->validator(SystemUserForms::$userLogin);
+        $info = $this->user->getInfoByName($data['name']);
+        if (!empty($info)) {
+            $this->response->end(http_response(400, '该用户名已存在'));
+            return;
+        }
+
+        $res = $this->user->setUser($data);
+        if ($res) {
+            $this->response->end(http_response(200, $data['name'] . '注册成功'));
+        } else {
+            $this->response->end(http_response(400, $data['name'] . '注册失败'));
+        }
+    }
+        
     /**
      * 用户列表
      * @throws Exception
      */
     public function getUserListAction(): void
     {
-        $data = $this->validator('SystemUserForms', 'getUserList');
+        $data = $this->validator(SystemUserForms::$getUserList);
         $res  = $this->user->getInfoList($data);
         if ($res) {
-            $this->response->end(http_response(200, $res));
+            $this->response->end(http_response(200, '', $res));
         } else {
             $this->response->end(http_response(500, '查询失败'));
         }

@@ -13,34 +13,11 @@ declare(strict_types=1);
 
 namespace App\Domain\System;
 
-use App\Models\Mysql\{
-    SystemUser,
-    SystemUserLog as UserLog,
-    UserLogView as UserV,
-};
+use App\Models\MysqlFactory;
+use Exception;
 
 class User
 {
-    /**
-     * @var SystemUser
-     */
-    private $user;
-    /**
-     * @var UserLog
-     */
-    private $user_log;
-    /**
-     * @var UserV
-     */
-    private $user_v;
-
-    public function __construct()
-    {
-        $this->user     = new SystemUser();
-        $this->user_log = new UserLog();
-        $this->user_v   = new UserV();
-    }
-
     /**
      * 获取用户列表数据
      *
@@ -61,7 +38,7 @@ class User
         $chan = new \Swoole\Coroutine\Channel(2);
         go(function () use ($chan) { //获取总数
             try {
-                $count = $this->user->getListCount();
+                $count = MysqlFactory::systemUser()->getListCount();
                 $chan->push(['count' => $count]);
             } catch (\Throwable $e) {
                 $chan->push(['500' => $e->getMessage()]);
@@ -69,7 +46,7 @@ class User
         });
         go(function () use ($chan, $data) { //获取列表数据
             try {
-                $list = $this->user->getUserList($data);
+                $list = MysqlFactory::systemUser()->getUserList($data);
                 $chan->push(['list' => $list]);
             } catch (\Throwable $e) {
                 $chan->push(['500' => $e->getMessage()]);
@@ -85,6 +62,25 @@ class User
         }
 
         return $res;
+    }
+    
+    /**
+     *
+     * @param array $data
+     *
+     * @return int
+     * @throws Exception
+     */
+    public function editUser(array $data): int
+    {
+        return MysqlFactory::systemUser()->editUser($data);
+    }
+
+    public function setLoginLog(array $data): void
+    {
+        go(function () use ($data) {
+            MysqlFactory::systemUserLog()->setLoginLog($data);
+        });
     }
     
 }
