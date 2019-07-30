@@ -13,7 +13,7 @@
 Model中的方法如有需要用到数据库连接对象时都必须设置为protected受保护类型，这样外层在正常调用数据方法操作时，会自动先请求AbstractModel中的
 call魔术方法进行连接池操作的业务分流。
 
-4、 修改swoole.php、application/library/Server.php与AutoReload.php三个文件需要手动重启框架服务，其他文件修改时框架会自动重载。
+4、 修改swoole.php、application/library/Server.php与AutoReload.php三个文件以及conf目录中配置文件需要手动重启框架服务，其他文件修改时框架会自动重载。
 
 （忽略）以下是框架自带的system模块约定：
 
