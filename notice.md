@@ -30,6 +30,8 @@ select:表名是base_config,后端接口在model层把查询的字段做一一�
 
 9、控制器层(controller目录)、服务领域层(domain目录)、模型层(model目录)三者只能从左到右调用，不能同级调用，也不能从右向左调用。
 
+10、由于使用yaf，需注意controllers命名空间必须与目录都是小写开头。
+
 **更多文档内容等抽空一一说明**
 
 > workerProcess与taskProcess可以理解为ADM模式的A与D层的关系，同时也有点像传统的controller与service层的关系,但又有本质的区别：
