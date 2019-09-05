@@ -12,6 +12,8 @@ value参数说明：
  
  * action值为** * **时代表路由直接转发请求的uri，当设定其他值时代表转发指定的路由，**指定格式：/modules/controller/action**
  
+ * 由于wlsh框架是全协程模式，所以不支持正则与注解（反射机制）路由
+ 
 **注：uri与action值结尾不能有 / 字符**
  
 > 目录conf/routerFilter.php 该文件是处理项目自定义路由信息
@@ -27,5 +29,7 @@ value参数说明：
     '/system/backup/del'        => ['auth' => true,  'method' => 'DELETE', 'action' => '*'],
     '/login/get_log_user_view'  => ['auth' => false, 'method' => 'GET',    'action' => '*'],
     '/finish/log/index'         => ['auth' => false, 'method' => 'Cli',    'action' => '/finish/flog/index'],
+
+    '/system/v1/menu/get_menu_list' => ['auth' => true, 'method' => 'GET', 'action' => '/System/V1/Menu/getMenuList'],
 ]
 ```
