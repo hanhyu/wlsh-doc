@@ -14,4 +14,5 @@
 
 2. 宿主机mysql的3307映射base_mysql_8.0中的3306
 
-> docker-composer 稍后会放出组件扩展的整套docker服务运行环境
+## Dockerfile与docker-compose
+> 私有项目：https://gitee.com/hanhyu/wlsh-docker 如有需要，请联系开源作者邮箱索取
