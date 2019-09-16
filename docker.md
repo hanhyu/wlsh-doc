@@ -1,18 +1,16 @@
 #### 组件容器
 
-## 启动说明
+## 环境搭建
 
-1. 启动框架：docker start base_frame
+```
+第一步： docker build -f Dockerfile -t hanhyu/wlsh:v1 .
 
-2. 启动缓存：docker start base_redis_5.0
+第二步： docker-compose up -d
 
-3. 启动数据库：docker start base_mysql_8.0
+第三步： 进入mysql客户端导入数据库文件
 
-## 默认设置
-
-1. 宿主机redis的6380映射base_redis_5.0中的6379
-
-2. 宿主机mysql的3307映射base_mysql_8.0中的3306
+第四步： 进入mongodb客户端创建baseFrame数据库，并创建用户名与密码
+``` 
 
 ## Dockerfile与docker-compose
 > 私有项目：https://gitee.com/hanhyu/wlsh-docker 如有需要，请联系开源作者邮箱索取
