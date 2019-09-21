@@ -27,5 +27,6 @@
 
 ## 开启HTTP2协议
 开启http2.0时，request方法server数组比http1.1少了两个参数：path_info与master_time。
+> swoole4.4.6版本已修复
 
 ## 更多问题稍后汇总出来
