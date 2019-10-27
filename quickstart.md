@@ -2,7 +2,7 @@
 
 wlsh启动所需的php扩展版本最低要求：
 
-> 必须已安装php 7.3、swoole 4.4.6、redis-5.0、mysql-8.0、inotify、yaf 13.1.1(支持命名空间的yaf版本，链接：https://github.com/gaohuia/yaf)
+> 必须已安装php 7.3、swoole 4.4.8、redis-5.0、mysql-8.0、inotify、yaf 13.1.1(支持命名空间的yaf版本，链接：https://github.com/gaohuia/yaf)
 
 ## 启动预检
 > php swoole.php start         每次启动服务前使用该命令做预检
@@ -23,4 +23,4 @@ wlsh启动所需的php扩展版本最低要求：
 > php swoole.php reload
 
 
-?> 注意：所有命令都是在根目录下执行;不支持restart命令，重启服务请先用stop命令停止服务、再用start系列命令开启服务。
+?> 注意：所有命令都是在根目录下执行;不支持restart命令，可自行使用systemd管理swoole服务，实现故障重启、开机自启动等功能。
