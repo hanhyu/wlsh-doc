@@ -2,7 +2,7 @@
 
 ## websocket协议响应格式
 
-```
+```json
 {
     "code": 200,
     "uri": "ws/index/login",
@@ -44,10 +44,10 @@
 
 ## http协议响应格式
 
-```
+```json
 {
     "code": 400,
-    "msg":"用户名或密码错误"
+    "msg":"用户名或密码错误",
     "data":[]
 }
 ```

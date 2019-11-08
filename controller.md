@@ -19,7 +19,7 @@ ControllersTrait中是设置全局服务对象、设置全局请求对象、设�
  
 示例：
 
-```
+```php
 <?php
 declare(strict_types=1);
 

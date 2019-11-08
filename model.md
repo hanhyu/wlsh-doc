@@ -10,7 +10,7 @@
  
  ## mysql模型
  
-```
+```php
 <?php
 declare(strict_types=1);
 
@@ -71,7 +71,7 @@ $list = MysqlFactory::systemUser()->getUserList($data);
 
 ## redis模型
 
-```
+```php
 <?php
 declare(strict_types=1);
 
@@ -108,7 +108,7 @@ $value = RedisFactory::login()->getValue($key);
 
 ## mongo模型
 
-```
+```php
 <?php
 declare(strict_types=1);
 

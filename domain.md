@@ -7,7 +7,7 @@ application/domain中目录结构与modules模块目录结构保持一致性
  * 可以并行执行的流程必须使用协程处理
  
 
-```
+```php
 <?php
 declare(strict_types=1);
 
