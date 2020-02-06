@@ -16,7 +16,7 @@ value参数说明：
  
 **注：uri与action值结尾不能有 / 字符**
  
-> 目录conf/routerFilter.php 该文件是处理项目自定义路由信息
+> 目录conf/routerFilter.php 该文件是处理项目自定义路由信息；可以按不同项目需求、所处团队、个人喜好等针对uri增加加密key.
 
 ```
 [
