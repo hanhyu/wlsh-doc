@@ -9,11 +9,11 @@
   
 * 核心功能
   * [一个入口](/open.md)
-  * [两个核心](/core.md)
+  * [一个核心](/core.md)
 
 * [供参考]使用指南
   * [配置](/config.md)
-  * [路由](/route.md)
+  * [注解路由](/route.md)
   * [控制器](/controller.md)
   * [服务领域](/domain.md)
   * [模型](/model.md)
@@ -22,7 +22,6 @@
   * [响应](/response.md)
   * [异常](/exception.md)
   * [Session](/session.md)
-  * [接口文档](/apidoc.md)
   * [协程](/coroutine.md)
   * [任务](/task.md)
   * [日志](/log.md)
@@ -32,7 +31,6 @@
 * [供参考]协程连接池
   * [Redis](/redis.md)
   * [pdo](/pdo.md)
-  * [协程mysql](/mysql.md)
 
 * [供参考]怎样使用
   * [默认示例](/system.md)

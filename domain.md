@@ -2,10 +2,7 @@
 
 application/domain中目录结构与modules模块目录结构保持一致性
 
- * 每个php文件需要开启严格模式：declare(strict_types=1);
- 
- * 可以并行执行的流程必须使用协程处理
- 
+ * 每个php文件需要开启严格模式：declare(strict_types=1)
 
 ```php
 <?php
@@ -13,8 +10,11 @@ declare(strict_types=1);
 
 namespace App\Domain\System;
 
-use App\Models\MysqlFactory;
-use Exception;
+use App\Library\ProgramException;
+use App\Models\Mysql\SystemUserLogMysql;
+use App\Models\Mysql\SystemUserMysql;
+use App\Models\Mysql\UserLogViewMysql;
+use Swoole\Coroutine\Channel;
 
 class User
 {
@@ -35,32 +35,8 @@ class User
         }
         $data['where'] = [];
 
-        $chan = new \Swoole\Coroutine\Channel(2);
-        go(function () use ($chan) { //获取总数
-            try {
-                $count = MysqlFactory::systemUser()->getListCount();
-                $chan->push(['count' => $count]);
-            } catch (\Throwable $e) {
-                $chan->push(['500' => $e->getMessage()]);
-            }
-        });
-        go(function () use ($chan, $data) { //获取列表数据
-            try {
-                $list = MysqlFactory::systemUser()->getUserList($data);
-                $chan->push(['list' => $list]);
-            } catch (\Throwable $e) {
-                $chan->push(['500' => $e->getMessage()]);
-            }
-        });
-
-        for ($i = 0; $i < 2; $i++) {
-            $res += $chan->pop(7);
-            if (isset($res['500'])) {
-                co_log(['exception' => $res['500']], 'getUserListAction mysql异常');
-                return null;
-            }
-        }
-
+        $res['count'] = SystemUserMysql::getInstance()->getListCount();
+        $res['list']  = SystemUserMysql::getInstance()->getUserList($data);
         return $res;
     }
     
@@ -69,18 +45,17 @@ class User
      * @param array $data
      *
      * @return int
-     * @throws Exception
+     * @throws ProgramException
+     * @throws \Envms\FluentPDO\Exception
      */
     public function editUser(array $data): int
     {
-        return MysqlFactory::systemUser()->editUser($data);
+        return SystemUserMysql::getInstance()->editUser($data);
     }
 
     public function setLoginLog(array $data): void
     {
-        go(function () use ($data) {
-            MysqlFactory::systemUserLog()->setLoginLog($data);
-        });
+        SystemUserLogMysql::getInstance()->setLoginLog($data);
     }
     
 }
