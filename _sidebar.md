@@ -2,7 +2,7 @@
   * [框架特色](/feature.md)
   * [框架流程图](/process.md)
   * [前提条件](/basic.md)
-  * [安装](/install.md)
+  * [快速开始](/install.md)
   * [容器](/docker.md)
   * [框架启动](/quickstart.md)
   * [变更日志](/changelog.md)
